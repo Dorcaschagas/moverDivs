@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horizontal Scroll with Buttons</title>
+    <style>
+        body {
+            height: 100vh;
+            margin: 0;
+            overflow-x: hidden;
+            /* Desativa o scroll horizontal padrão do body */
+        }
+
+        .content {
+            width: 200vw;
+            /* Largura maior que a viewport para permitir o scroll horizontal */
+            height: 50vh;
+            background: linear-gradient(to right, #f06, #4a90e2);
+        }
+
+        .scroll-button {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #000;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 1000;
+            font-size: 18px;
+            display: none; /* Esconde os botões por padrão */
+        }
+
+        .scroll-left {
+            right: 60px; /* Espaço para o botão da direita */
+        }
+
+        .scroll-right {
+            right: 0;
+        }
+
+        /* Exibe os botões somente em dispositivos móveis */
+        @media (max-width: 768px) {
+            .scroll-button {
+                display: block; /* Exibe os botões em telas pequenas */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content" id="content"></div>
+    <button class="scroll-button scroll-left" id="scrollLeft">⟵</button>
+    <button class="scroll-button scroll-right" id="scrollRight">⟶</button>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Verifica se a tela é pequena e aplica a funcionalidade dos botões
+            function isMobile() {
+                return window.matchMedia("(max-width: 768px)").matches;
+            }
+
+            const $scrollLeftButton = $('#scrollLeft');
+            const $scrollRightButton = $('#scrollRight');
+            let scrollInterval;
+
+            if (isMobile()) {
+                function startScrolling(direction) {
+                    scrollInterval = setInterval(function() {
+                        window.scrollBy({
+                            left: direction,
+                            behavior: 'smooth'
+                        });
+                    }, 10); // Ajuste a frequência conforme necessário
+                }
+
+                function stopScrolling() {
+                    clearInterval(scrollInterval);
+                }
+
+                $scrollLeftButton.on('mousedown touchstart', function() {
+                    startScrolling(-300); // Move para a esquerda
+                }).on('mouseup touchend', function() {
+                    stopScrolling();
+                });
+
+                $scrollRightButton.on('mousedown touchstart', function() {
+                    startScrolling(300); // Move para a direita
+                }).on('mouseup touchend', function() {
+                    stopScrolling();
+                });
+            }
+
+            // Impede a rolagem horizontal por arraste
+            $(document).on('mousedown', function(e) {
+                if (e.clientX < window.innerWidth - 300) {
+                    e.preventDefault(); // Impede a ação padrão
+                }
+            });
+
+            $(document).on('mousemove', function(e) {
+                if (e.buttons > 0) {
+                    e.preventDefault(); // Impede o arraste horizontal
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
