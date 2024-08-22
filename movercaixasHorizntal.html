@@ -14,7 +14,7 @@
         rel="stylesheet">
     <style>
         .box-container {
-            width: 100px;
+            width: 300px;
             height: 100px;
             background-color: #6c757d;
             color: black;
@@ -38,6 +38,10 @@
             background-color: #ddd;
             border: dashed 2px #bbb;
         }
+
+        a{
+            text-decoration: none !important;
+        }
     </style>
 </head>
 
@@ -45,31 +49,36 @@
     <div class="container my-4">
         <div id="sortable" class="d-flex">
             <div id="div1" class="box-container p-3 me-2 border bg-light">
-                <button class="move-handle btn btn-primary btn-sm">Move</button>
+                <!-- <button class="move-handle btn btn-primary btn-sm">Move</button> -->
                 Caixa 1
             </div>
 
             <div id="div2" class="box-container p-3 me-2 border bg-light">
-                <button class="move-handle btn btn-primary btn-sm">Move</button>
+                <!-- <button class="move-handle btn btn-primary btn-sm">Move</button> -->
                 Caixa 2
             </div>
 
             <div id="div3" class="box-container p-3 me-2 border bg-light">
-                <button class="move-handle btn btn-primary btn-sm">Move</button>
+                <!-- <button class="move-handle btn btn-primary btn-sm">Move</button> -->
                 Caixa 3
             </div>
 
             <div id="div4" class="box-container p-3 me-2 border bg-light">
-                <button class="move-handle btn btn-primary btn-sm">Move</button>
+                <!-- <button class="move-handle btn btn-primary btn-sm">Move</button> -->
                 Caixa 4
             </div>
 
             <div id="div5" class="box-container p-3 me-2 border bg-light">
-                <button class="move-handle btn btn-primary btn-sm">Move</button>
+                <!-- <button class="move-handle btn btn-primary btn-sm">Move</button> -->
                 Caixa 5
             </div>
 
         </div>
+    </div>
+
+    <div class="modal-fotter">
+        <div class="btn border"><a href="index.html">vertical/horizontal</a></div>
+        <div class="btn border"><a href="movercaixasVertical.html">Apenas na horizontal</a></div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

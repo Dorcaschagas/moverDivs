@@ -1,112 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Horizontal Scroll with Buttons</title>
+    <title>Mover com Botão</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
     <style>
-        body {
-            height: 100vh;
-            margin: 0;
-            overflow-x: hidden;
-            /* Desativa o scroll horizontal padrão do body */
+        .box-container {
+            /* width: 100px; */
+            height: 100px;
+            background-color: #6c757d;
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: default;
+            position: relative;
         }
 
-        .content {
-            width: 200vw;
-            /* Largura maior que a viewport para permitir o scroll horizontal */
-            height: 50vh;
-            background: linear-gradient(to right, #f06, #4a90e2);
+        .move-handle {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            cursor: move;
         }
 
-        .scroll-button {
-            position: fixed;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: #000;
-            color: #fff;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-            z-index: 1000;
-            font-size: 18px;
-            display: none; /* Esconde os botões por padrão */
-        }
-
-        .scroll-left {
-            right: 60px; /* Espaço para o botão da direita */
-        }
-
-        .scroll-right {
-            right: 0;
-        }
-
-        /* Exibe os botões somente em dispositivos móveis */
-        @media (max-width: 768px) {
-            .scroll-button {
-                display: block; /* Exibe os botões em telas pequenas */
-            }
+        .ui-state-highlight {
+            width: 100px;
+            height: 100px;
+            background-color: #ddd;
+            border: dashed 2px #bbb;
         }
     </style>
 </head>
 
 <body>
-    <div class="content" id="content"></div>
-    <button class="scroll-button scroll-left" id="scrollLeft">⟵</button>
-    <button class="scroll-button scroll-right" id="scrollRight">⟶</button>
+    <div class="container my-4">
+        <div id="sortable" class=" row">
+            <div class="box-container col-2 p-3 me-2 border bg-light">
+                <!-- <button class="move-handle btn btn-primary btn-sm">Move</button> -->
+                Caixa 1 primeira fila
+            </div>
+            <div class="box-container col-2 p-3 me-2 border bg-light">
+                <!-- <button class="move-handle btn btn-primary btn-sm">Move</button> -->
+                Caixa 2 primeira fila
+            </div>
+            <div class="box-container col-2 p-3 me-2 border bg-light">
+                <!-- <button class="move-handle btn btn-primary btn-sm">Move</button> -->
+                Caixa 3 primeira fila
+            </div>
+            <div class="box-container col-2 p-3 me-2 border bg-light">
+                <!-- <button class="move-handle btn btn-primary btn-sm">Move</button> -->
+                Caixa 4 primeira fila
+            </div>
+            <div class="box-container col-2 p-3 me-2 border bg-light">
+                <!-- <button class="move-handle btn btn-primary btn-sm">Move</button> -->
+                Caixa 5 primeira fila
+            </div>
+            <div class="box-container col-2 p-3 me-2 border bg-light">
+                <!-- <button class="move-handle btn btn-primary btn-sm">Move</button> -->
+                Caixa 1 segunda fila
+            </div>
+            <div class="box-container col-2 p-3 me-2 border bg-light">
+                <!-- <button class="move-handle btn btn-primary btn-sm">Move</button> -->
+                Caixa 2 segunda fila
+            </div>
+            <div class="box-container col-2 p-3 me-2 border bg-light">
+                <!-- <button class="move-handle btn btn-primary btn-sm">Move</button> -->
+                Caixa 3 segunda fila
+            </div>
+            <div class="box-container col-2 p-3 me-2 border bg-light">
+                <!-- <button class="move-handle btn btn-primary btn-sm">Move</button> -->
+                Caixa 4 segunda fila
+            </div>
+            <div class="box-container col-2 p-3 me-2 border bg-light">
+                <!-- <button class="move-handle btn btn-primary btn-sm">Move</button> -->
+                Caixa 5 segunda fila
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-fotter">
+        <div class="btn border"><a href="movercaixasVertical.html">Apenas na vertical</a></div>
+        <div class="btn border"><a href="movercaixasHorizntal.html">Apenas na horizontal</a></div>
+    </div>
+
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script>
+        function initializeSortable() {
+            $("#sortable").sortable({
+                placeholder: "ui-state-highlight",
+                // Remova a opção axis ou defina-a como "both" para permitir movimento em ambas as direções
+            });
+            $("#sortable").disableSelection();
+        }
+
         $(document).ready(function() {
-            // Verifica se a tela é pequena e aplica a funcionalidade dos botões
-            function isMobile() {
-                return window.matchMedia("(max-width: 768px)").matches;
-            }
-
-            const $scrollLeftButton = $('#scrollLeft');
-            const $scrollRightButton = $('#scrollRight');
-            let scrollInterval;
-
-            if (isMobile()) {
-                function startScrolling(direction) {
-                    scrollInterval = setInterval(function() {
-                        window.scrollBy({
-                            left: direction,
-                            behavior: 'smooth'
-                        });
-                    }, 10); // Ajuste a frequência conforme necessário
-                }
-
-                function stopScrolling() {
-                    clearInterval(scrollInterval);
-                }
-
-                $scrollLeftButton.on('mousedown touchstart', function() {
-                    startScrolling(-300); // Move para a esquerda
-                }).on('mouseup touchend', function() {
-                    stopScrolling();
-                });
-
-                $scrollRightButton.on('mousedown touchstart', function() {
-                    startScrolling(300); // Move para a direita
-                }).on('mouseup touchend', function() {
-                    stopScrolling();
-                });
-            }
-
-            // Impede a rolagem horizontal por arraste
-            $(document).on('mousedown', function(e) {
-                if (e.clientX < window.innerWidth - 300) {
-                    e.preventDefault(); // Impede a ação padrão
-                }
-            });
-
-            $(document).on('mousemove', function(e) {
-                if (e.buttons > 0) {
-                    e.preventDefault(); // Impede o arraste horizontal
-                }
-            });
+            initializeSortable();
         });
     </script>
 </body>
