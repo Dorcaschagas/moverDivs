@@ -39,10 +39,7 @@
 <body>
     <div class="container my-4">
         <div id="sortable" class=" row">
-            <div class="box-container col-2 p-3 me-2 border bg-light">
-                <!-- <button class="move-handle btn btn-primary btn-sm">Move</button> -->
-                Caixa 1 primeira fila
-            </div>
+            
             <div class="box-container col-2 p-3 me-2 border bg-light">
                 <!-- <button class="move-handle btn btn-primary btn-sm">Move</button> -->
                 Caixa 2 primeira fila
@@ -91,6 +88,34 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script>
+
+        class CriarDivs{
+            constructor(container){
+                this.$container = container
+            }
+
+            addDivCriacao(id, titulo, caixa){
+                $container.append(`
+                    div class="box-container col-2 p-3 me-2 border bg-light">
+                        Caixa ${titulo} primeira fila
+                    </div>
+                `)
+            }
+        }
+
+        const criarDiv = new CriarDivs('#sortable')
+        for(let i=0; i<10; i++){
+
+        }
+
+
+
+
+
+
+
+
+
         function initializeSortable() {
             $("#sortable").sortable({
                 placeholder: "ui-state-highlight",
