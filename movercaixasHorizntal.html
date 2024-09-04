@@ -10,95 +10,62 @@
         rel="stylesheet">
 
 
-    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
-        rel="stylesheet">
-    <style>
-        .box-container {
-            width: 300px;
-            height: 100px;
-            background-color: #6c757d;
-            color: black;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: move;
-        }
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 
-        .move-handle {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            cursor: move;
-            /* Cursor de movimentação no botão */
-        }
-
-        .ui-state-highlight {
-            width: 100px;
-            height: 100px;
-            background-color: #ddd;
-            border: dashed 2px #bbb;
-        }
-
-        a{
-            text-decoration: none !important;
-        }
-    </style>
 </head>
 
 <body>
     <div class="container my-4">
-        <div id="sortable" class="d-flex">
-            <div id="div1" class="box-container p-3 me-2 border bg-light">
-                <!-- <button class="move-handle btn btn-primary btn-sm">Move</button> -->
-                Caixa 1
-            </div>
-
-            <div id="div2" class="box-container p-3 me-2 border bg-light">
-                <!-- <button class="move-handle btn btn-primary btn-sm">Move</button> -->
-                Caixa 2
-            </div>
-
-            <div id="div3" class="box-container p-3 me-2 border bg-light">
-                <!-- <button class="move-handle btn btn-primary btn-sm">Move</button> -->
-                Caixa 3
-            </div>
-
-            <div id="div4" class="box-container p-3 me-2 border bg-light">
-                <!-- <button class="move-handle btn btn-primary btn-sm">Move</button> -->
-                Caixa 4
-            </div>
-
-            <div id="div5" class="box-container p-3 me-2 border bg-light">
-                <!-- <button class="move-handle btn btn-primary btn-sm">Move</button> -->
-                Caixa 5
-            </div>
-
-        </div>
+        <div id="horizontal" class="d-flex"></div>
     </div>
 
     <div class="modal-fotter">
-        <div class="btn border"><a href="index.html">vertical/horizontal</a></div>
-        <div class="btn border"><a href="movercaixasVertical.html">Apenas na horizontal</a></div>
+        <div class="btn border">
+            <a href="index.html">vertical/horizontal</a>
+        </div>
+        <div class="btn border">
+            <a href="movercaixasVertical.html">Apenas na horizontal</a>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="criarDiv.js"></script>
     <script>
 
-        
+        // class CriarDivs {
+        //     constructor(container) {
+        //         this.$container = $(container)
+        //     }
+
+        //     addDivsCriada(id, title, caixa) {
+        //         this.$container.append(`
+        //             <div id="${id}" class="box-container p-3 me-2 border bg-light">
+        //                 <p>${title}</p>
+        //             </div>
+        //         `);
+        //     }
+        // }
+
+        const criarDiv = new CriarDivs('#horizontal');
+
+        for (let i = 0; i < 5; i++) {
+            criarDiv.addDivCriacao(`div${i}`, `caixa${i}`, `${i}`)
+        }
+
+
         $(function () {
-            $("#sortable").sortable({
+            $("#horizontal").sortable({
                 placeholder: "ui-state-highlight",
                 axis: "x",
-                update: function(event, ui){
-                    var ordemIds = $('#sortable').sortable('toArray');
+                update: function (event, ui) {
+                    var ordemIds = $('#horizontal').sortable('toArray');
                     console.log('Nova Ordem dos IDs: ', ordemIds);
-
-
                 }
                 // handle: ".move-handle" // Apenas o botão permite arrastar
             });
-            $("#sortable").disableSelection();
+            $("#horizontal").disableSelection();
         });
 
     </script>

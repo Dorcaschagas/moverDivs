@@ -7,76 +7,12 @@
     <title>Mover com Botão</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
-    <style>
-        .box-container {
-            /* width: 100px; */
-            height: 100px;
-            background-color: #6c757d;
-            color: black;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: default;
-            position: relative;
-        }
-
-        .move-handle {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            cursor: move;
-        }
-
-        .ui-state-highlight {
-            width: 100px;
-            height: 100px;
-            background-color: #ddd;
-            border: dashed 2px #bbb;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <div class="container my-4">
-        <div id="sortable" class=" row">
-            
-            <div class="box-container col-2 p-3 me-2 border bg-light">
-                <!-- <button class="move-handle btn btn-primary btn-sm">Move</button> -->
-                Caixa 2 primeira fila
-            </div>
-            <div class="box-container col-2 p-3 me-2 border bg-light">
-                <!-- <button class="move-handle btn btn-primary btn-sm">Move</button> -->
-                Caixa 3 primeira fila
-            </div>
-            <div class="box-container col-2 p-3 me-2 border bg-light">
-                <!-- <button class="move-handle btn btn-primary btn-sm">Move</button> -->
-                Caixa 4 primeira fila
-            </div>
-            <div class="box-container col-2 p-3 me-2 border bg-light">
-                <!-- <button class="move-handle btn btn-primary btn-sm">Move</button> -->
-                Caixa 5 primeira fila
-            </div>
-            <div class="box-container col-2 p-3 me-2 border bg-light">
-                <!-- <button class="move-handle btn btn-primary btn-sm">Move</button> -->
-                Caixa 1 segunda fila
-            </div>
-            <div class="box-container col-2 p-3 me-2 border bg-light">
-                <!-- <button class="move-handle btn btn-primary btn-sm">Move</button> -->
-                Caixa 2 segunda fila
-            </div>
-            <div class="box-container col-2 p-3 me-2 border bg-light">
-                <!-- <button class="move-handle btn btn-primary btn-sm">Move</button> -->
-                Caixa 3 segunda fila
-            </div>
-            <div class="box-container col-2 p-3 me-2 border bg-light">
-                <!-- <button class="move-handle btn btn-primary btn-sm">Move</button> -->
-                Caixa 4 segunda fila
-            </div>
-            <div class="box-container col-2 p-3 me-2 border bg-light">
-                <!-- <button class="move-handle btn btn-primary btn-sm">Move</button> -->
-                Caixa 5 segunda fila
-            </div>
-        </div>
+        <div id="sortable" class=" row"></div>
     </div>
 
     <div class="modal-fotter">
@@ -87,33 +23,17 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="criarDiv.js"></script>
     <script>
-
-        class CriarDivs{
-            constructor(container){
-                this.$container = container
-            }
-
-            addDivCriacao(id, titulo, caixa){
-                $container.append(`
-                    div class="box-container col-2 p-3 me-2 border bg-light">
-                        Caixa ${titulo} primeira fila
-                    </div>
-                `)
-            }
-        }
 
         const criarDiv = new CriarDivs('#sortable')
         for(let i=0; i<10; i++){
-
+            if(i >= 5 ){
+                criarDiv.addDivCriacao(`div${i}`,`Caixa ${i} segunda fila`,`caixa${i}`)
+            } else {
+                criarDiv.addDivCriacao(`div${i}`,`Caixa ${i} primeira fila`,`caixa${i}`)
+            }
         }
-
-
-
-
-
-
-
 
 
         function initializeSortable() {
