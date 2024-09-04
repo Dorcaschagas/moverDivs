@@ -1,0 +1,25 @@
+<div id="verticalHorizontal" class=" row"></div>
+
+<script>
+
+    var inicio = new CriarCaixas('#verticalHorizontal')
+    for (let i = 0; i < 10; i++) {
+        if (i >= 5) {
+            inicio.montarCaixas(`div${i}`, `Caixa ${i} segunda fila`, `caixa${i}`)
+        } else {
+            inicio.montarCaixas(`div${i}`, `Caixa ${i} primeira fila`, `caixa${i}`)
+        }
+    }
+
+    function initializeSortable() {
+        $("#verticalHorizontal").sortable({
+            placeholder: "ui-state-highlight",
+            // Remova a opção axis ou defina-a como "both" para permitir movimento em ambas as direções
+        });
+        $("#verticalHorizontal").disableSelection();
+    }
+
+    $(document).ready(function () {
+        initializeSortable();
+    });
+</script>

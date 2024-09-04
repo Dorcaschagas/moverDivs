@@ -1,0 +1,21 @@
+<div id="vertical"></div>
+
+<script>
+    var vetical = new CriarCaixas('#vertical');
+    for (let i = 0; i < 5; i++) {
+        vetical.montarCaixas(`${i}`, `caixa ${i}`, `${i}`);
+    }
+
+    $(function () {
+        $("#vertical").sortable({
+            placeholder: "ui-state-highlight",
+            axis: "y",
+            update: function (event, ui) {
+                var ordemIds = $('#vertical').sortable('toArray');
+                console.log('Nova Ordem dos IDs: ', ordemIds);
+            }
+        });
+        $("#vertical").disableSelection();
+    });
+
+</script>

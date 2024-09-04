@@ -1,0 +1,24 @@
+<div id="horizontal" class="d-flex"></div>
+
+<script>
+
+    var horizontal = new CriarCaixas('#horizontal');
+
+    for (let i = 0; i < 5; i++) {
+        horizontal.montarCaixas(`div${i}`, `caixa${i}`, `${i}`)
+    }
+
+    $(function () {
+        $("#horizontal").sortable({
+            placeholder: "ui-state-highlight",
+            axis: "x",
+            update: function (event, ui) {
+                var ordemIds = $('#horizontal').sortable('toArray');
+                console.log('Nova Ordem dos IDs: ', ordemIds);
+            }
+            // handle: ".move-handle" // Apenas o botão permite arrastar
+        });
+        $("#horizontal").disableSelection();
+    });
+
+</script>

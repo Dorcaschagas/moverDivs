@@ -1,0 +1,50 @@
+<div class="areaListas d-flex"></div>
+
+<script>
+
+    var bigSmallbox = new CriarCaixas('.areaListas');
+    for (let i = 0; i < 5; i++) {
+        bigSmallbox.montarCaixaGrandePequena(`${i}`, `titulo${i}`, `caixa${i}`)
+    }
+
+
+    $(function () {
+        // Movendo as divs grandes horizontalmente
+        $(".areaListas").sortable({
+            axis: "x", // Permite apenas movimento horizontal
+            placeholder: "ui-state-highlight", // Placeholder visual durante a movimentação
+            update: function (event, ui) {
+                // Aqui você pode manipular a nova ordem das divs, se necessário
+                var ordemIds = $('.areaListas').sortable('toArray');
+                console.log(ordemIds); // Exibe a nova ordem no console
+            }
+        });
+
+        // Movendo as pequenas divs dentro das grandes divs
+        $(".small-box").draggable({
+            revert: "invalid", // Retorna à posição original se não for largada em um destino válido
+            helper: "clone", // Cria um clone enquanto arrasta
+            start: function (event, ui) {
+                $(this).addClass("small-highlight");
+            },
+            stop: function (event, ui) {
+                $(this).removeClass("small-highlight");
+            }
+        });
+
+        $(".large-container").droppable({
+            accept: ".small-box", // Aceita apenas as pequenas divs
+            tolerance: "intersect",
+            drop: function (event, ui) {
+                $(this).append(ui.draggable); // Move a pequena div para o novo container
+                ui.draggable.css({ top: "0", left: "0", position: "relative" }); // Reseta a posição da pequena div dentro do novo container
+            },
+            // over: function (event, ui) {
+            //     $(this).addClass("ui-state-highlight");
+            // },
+            // out: function (event, ui) {
+            //     $(this).removeClass("ui-state-highlight");
+            // }
+        });
+    });
+</script>
