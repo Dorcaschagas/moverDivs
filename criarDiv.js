@@ -22,6 +22,16 @@ class CriarCaixas {
 }
 
 function carregarPagina(pagina) {
+    $('.vertical, .horizontal, .caixaGrandePequena').removeClass('btnClicado')
+    if(pagina == 'vertical.html'){
+        $('.vertical').addClass('btnClicado')
+    }
+    if(pagina == 'horizontal.html'){
+        $('.horizontal').addClass('btnClicado')
+    }
+    if(pagina == 'caixaGrandePequena.html'){
+        $('.caixaGrandePequena').addClass('btnClicado')
+    }
     $('.carregarConteudo').load(`${pagina}`)
 }
 

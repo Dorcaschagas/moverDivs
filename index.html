@@ -20,10 +20,16 @@
     <div class="container-fluid">
       <div class="carregarConteudo container mt-2"></div>
 
-      <div class="row p-0 m-0 w-100 position-absolute  justify-content-center" style="bottom: 120px; max-height:20px ;">
-        <div class="col-11 col-sm-3 col-md-3 m-0 p-1" id="botao1"><div class="text-center border rounded-5 bg-outline-dark" onclick="carregarPagina('vertical.html')">Vertical</div></div>
-        <div class="col-11 col-sm-3 col-md-3 m-0 p-1" id="botao2"><div class="text-center border rounded-5 bg-outline-dark" onclick="carregarPagina('horizontal.html')">Horizontal</div></div>
-        <div class="col-11 col-sm-4 col-md-4 m-0 p-1" id="botao3"><div class="text-center border rounded-5 bg-outline-dark" onclick="carregarPagina('caixaGrandePequena.html')">Mover entre caixas</div></div>
+      <div class="row p-0 m-0 w-100 position-absolute justify-content-center" style="bottom: 120px; max-height: 20px">
+        <div class="col-11 col-sm-3 col-md-3 m-0 p-1" id="botao1">
+          <div class="text-center border rounded-5 bg-outline-dark vertical" onclick="carregarPagina('vertical.html')">Vertical</div>
+        </div>
+        <div class="col-11 col-sm-3 col-md-3 m-0 p-1" id="botao2">
+          <div class="text-center border rounded-5 bg-outline-dark horizontal" onclick="carregarPagina('horizontal.html')">Horizontal</div>
+        </div>
+        <div class="col-11 col-sm-4 col-md-4 m-0 p-1" id="botao3">
+          <div class="text-center border rounded-5 bg-outline-dark caixaGrandePequena" onclick="carregarPagina('caixaGrandePequena.html')">Mover entre caixas</div>
+        </div>
         <!-- <div class="col-11 col-sm-3 col-md-3 m-0 p-1" id="botao4"><div class="text-center border rounded-5 bg-outline-dark" onclick="carregarPagina('verticalHorizontal.html')">Vertical/Horizontal</div></div> -->
         <!-- <button class="btn btn-secondary" onclick="reverTutorial()" id="reverTutorial">Rever Tutorial</button> -->
       </div>
@@ -46,41 +52,43 @@
         introJs().start();
       });
 
-      introJs().setOptions({
+      introJs()
+        .setOptions({
           steps: [
             {
               element: "#botao0",
-              intro: "Apresentação, cliente em next para ver as funcionalidades de cada botão",
+              intro: "Click em next para conhecer as funcionalidades ou fora da caixinha para pular a apresentação!",
               position: "top", // Definição da posição do tooltip (caixa com mensagem) do tutorial.
+              showSkipButton:true,
             },
             {
               element: "#botao1",
-              intro: "Mover as caixas na vertical",
+              intro: "Permite Mover as caixas na vertical",
               position: "top", // Definição da posição do tooltip (caixa com mensagem) do tutorial.
+              // showSkipButton: true, // Mostra o botão "Pular" apenas no primeiro passo
             },
             {
               element: "#botao2",
-              intro: "Mover as caixinhas na hotizontal",
+              intro: "Permite Mover as caixinhas na hotizontal",
               position: "top",
             },
             {
               element: "#botao3",
-              intro: "Caixas maiores com caixas menores dentro que podem ser movidas de uma caixa para outra",
+              intro: "Caixas menores que podem ser movidas de uma caixa grande para outra.",
               position: "top", // Definição automática da posição baseado no espaço disponível
             },
-            // {
-            //   element: "#botao4",
-            //   intro: "Aqui é possível mover as caixas tanto na vertical quanto na horizontal",
-            //   position: "top left", // Definição automática da posição baseado no espaço disponível
-            // },
-            // Adicione mais passos conforme necessário
           ],
-        }).start();
+          nextLabel: "Próximo", // Texto para o botão "Next"
+          prevLabel: "Voltar", // Texto para o botão "Back"
+          // skipLabel: "Pular", // Texto para o botão "Skip"
+          doneLabel: "Finalizar",
+          showProgress: true,
+        })
+        .start();
 
-        function reverTutorial(){
-            introJs().start();
-        }
-
+      function reverTutorial() {
+        introJs().start();
+      }
     </script>
   </body>
 </html>

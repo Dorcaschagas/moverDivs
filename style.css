@@ -70,3 +70,14 @@ a {
 #vertical div{
     min-width: 150px;
 }
+
+.btnClicado{
+    background-color: green !important;
+    color: white !important;
+}
+
+.vertical,
+.horizontal,
+.caixaGrandePequena{
+    cursor: pointer;
+}
