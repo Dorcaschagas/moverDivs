@@ -1,16 +1,14 @@
 .large-container {
     width: 300px;
     min-height: 200px;
-    height: 500px;
+    height: auto;
     border: 2px solid #007DC6;
-    margin: 10px;
-    padding: 10px;
+    margin: 2px;
+    padding: 1px;
     background-color: #f0f0f0;
     position: relative;
     display: inline-block;
     vertical-align: top;
-    /* overflow: auto; */
-
 }
 
 .small-box {
@@ -21,13 +19,13 @@
     align-items: center;
     justify-content: center;
     cursor: move;
-    margin-bottom: 10px;
+    margin: 20px 0;
     z-index: 10;
 }
 
 .ui-state-highlight {
     background-color: #d3d3d3;
-    width: 200px;
+    width: 100px;
     height: 100px;
     border: 2px dashed #007DC6;
     margin: 10px;
@@ -47,7 +45,7 @@
 
 
 .box-container {
-    /* width: 100px; */
+    width: 100px;
     height: 100px;
     background-color: #6c757d;
     color: black;
@@ -67,4 +65,8 @@
 
 a {
     text-decoration: none !important;
+}
+
+#vertical div{
+    min-width: 150px;
 }

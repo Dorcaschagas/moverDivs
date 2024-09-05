@@ -13,7 +13,7 @@ class CriarCaixas {
 
     montarCaixaGrandePequena(id, titulo, caixa) {
         this.$container.append(`
-        <div id="div${id}" class="large-container d-grid">
+        <div id="div${id}" class="large-container">
             <p class="m-0 p-0 w-100 bg-light text-center titulo">${titulo}</p>
             <div id="smallBoxlarge${id}" class="small-box w-100">${caixa}</div>
         </div>
@@ -24,3 +24,5 @@ class CriarCaixas {
 function carregarPagina(pagina) {
     $('.carregarConteudo').load(`${pagina}`)
 }
+
+carregarPagina('vertical.html')
