@@ -1,4 +1,4 @@
-# <a href="https://dorcaschagas.github.io/moverDivs/">mover caixar</a>
+# <a href="https://dorcaschagas.github.io/moverDivs/">mover caixa</a>
 
 
 ## Apresentação de Funcionalidades
